@@ -13,12 +13,12 @@ impl Action {
         Action{name:name}
     }
 
-    pub fn do_something(self, do) {
+    pub fn do_something(&self, do_action: FunAction<String>) {
 
         match do_action{
-            FunAction::DoRun(T) => println!{"{} is running", T.to_string()},
-            FunAction::DoWalk(T) => println!{"{} is walking", T.to_string()},
-            FunAction::DoJump(T) => println!{"{} is jumping", T.to_string()},
+            FunAction::DoRun(t) => println!{"{} is  {} running",self.name, t.to_string()},
+            FunAction::DoWalk(t) => println!{"{} is walking", t.to_string()},
+            FunAction::DoJump(t) => println!{"{} is jumping", t.to_string()},
             //_ => println!{" do nothing"},
         }
     }
