@@ -9,7 +9,12 @@ fn main() {
     // 学习数组
     vet_study();
 
+    vet_hash();
 
+}
+
+fn vet_hash(){
+    s_vet::hash::show_hash();
 }
 
 fn vet_study(){
@@ -18,7 +23,6 @@ fn vet_study(){
     s_vet::one::loop_vec();
     s_vet::diff_type::use_diff_types();
     s_vet::diff_type::show_ip_addrs();
-
 }
 
 fn option_study() {
