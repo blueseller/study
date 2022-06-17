@@ -1,5 +1,7 @@
 mod s_option;
 mod s_vet;
+mod typ_change;
+mod s_thread;
 use s_option::opt_fun;
 fn main() {
 
@@ -7,10 +9,26 @@ fn main() {
     //option_study();
 
     // 学习数组
-    vet_study();
+    //vet_study();
 
-    vet_hash();
+    //vet_hash();
 
+    //change_type();
+
+    run_thread();
+
+}
+
+fn run_thread() {
+    s_thread::ths::run_thread();
+
+    s_thread::ths::run_thread_wait();
+
+    s_thread::ths::run_thread_move();
+}
+
+fn change_type() {
+    typ_change::change::change();
 }
 
 fn vet_hash(){
