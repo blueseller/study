@@ -25,6 +25,8 @@ fn run_thread() {
     s_thread::ths::run_thread_wait();
 
     s_thread::ths::run_thread_move();
+
+    s_thread::s_mutex::count_num_arc();
 }
 
 fn change_type() {

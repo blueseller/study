@@ -42,6 +42,7 @@ pub fn run_thread_move() {
     handler.join().unwrap();
 }
 
+/*
 pub fn run_thread_cas() {
 let num_threads = 100;
 for i in 0..num_threads {
@@ -59,3 +60,4 @@ for i in 0..num_threads {
 }
 
 }
+ */
