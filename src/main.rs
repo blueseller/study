@@ -2,6 +2,8 @@ mod s_option;
 mod s_vet;
 mod typ_change;
 mod s_thread;
+mod s_point;
+
 use s_option::opt_fun;
 fn main() {
 
@@ -27,6 +29,13 @@ fn run_thread() {
     s_thread::ths::run_thread_move();
 
     s_thread::s_mutex::count_num_arc();
+    s_thread::ths::th_local();
+
+    s_thread::ths::th_only_once();
+
+    s_thread::th_msg::ch_mpsc();
+
+    s_thread::th_msg::send_recv();
 }
 
 fn change_type() {

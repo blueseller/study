@@ -1,3 +1,5 @@
+use std::borrow::BorrowMut;
+use std::cell::RefCell;
 use std::thread;
 use std::sync::Arc;
 use std::time::Duration;
@@ -43,6 +45,9 @@ pub fn run_thread_move() {
 }
 
 /*
+=======
+/* 
+>>>>>>> 1c6bdd5 (update code)
 pub fn run_thread_cas() {
 let num_threads = 100;
 for i in 0..num_threads {
@@ -60,4 +65,67 @@ for i in 0..num_threads {
 }
 
 }
+<<<<<<< HEAD
  */
+=======
+*/
+
+pub fn th_local() {
+    thread_local! (static FOO:RefCell<u32> = RefCell::new(1));
+
+    let FOO2:RefCell<String> = RefCell::new("hello".to_string());
+
+    FOO.with(|f|{
+        assert_eq!(*f.borrow(),1);
+        *f.borrow_mut() = 2;
+        println!("{:?}", f);
+    });
+
+
+    println!("FOO2 is {}", FOO2.take());
+
+    let t = thread::spawn(move || {
+        FOO.with(|f|{
+            assert_eq!(*f.borrow(),1);
+            *f.borrow_mut() = 3;
+            println!("{:?}", f);
+        });
+    });
+
+    t.join().unwrap();
+    
+    FOO.with(|f|{
+        assert_eq!(*f.borrow(),2);
+        println!("{:?}", f);
+    });
+}
+
+
+use std::sync::Once;
+pub fn th_only_once() {
+    static mut VAL:usize = 0;
+    static INIT: Once = Once::new();
+
+    let th1 = thread::spawn(move ||{
+        INIT.call_once(|| {
+            unsafe {
+                VAL = 1;
+            }
+        });
+    });
+
+    let th2 = thread::spawn(move ||{
+        INIT.call_once(|| {
+            unsafe {
+                VAL = 2;
+            }
+        });
+    });
+
+
+    th1.join().unwrap();
+    th2.join().unwrap();
+
+    println!("{}", unsafe{VAL});
+
+}
